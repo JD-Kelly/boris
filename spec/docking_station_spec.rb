@@ -5,7 +5,7 @@ describe DockingStation do
   describe "#release_bike" do
     it { is_expected.to respond_to :release_bike }
 
-    it "Errors when @bike_docked is empty" do
+    it "Errors when @bikes_docked is empty" do
       expect {subject.release_bike}.to raise_error "No bikes available"
     end
 
@@ -20,7 +20,7 @@ describe DockingStation do
     it { is_expected.to respond_to(:docked).with(1).argument }
     
     it 'errors when docking station full' do 
-      subject.docked(Bike.new)
+      20.times { subject.docked(Bike.new) }
       expect { subject.docked(Bike.new)}.to raise_error "No space available" 
     end
   end
@@ -28,6 +28,6 @@ describe DockingStation do
   it 'returns docked bike' do 
     bike = Bike.new
     subject.docked(bike)
-    expect(subject.bike_docked).to eq bike 
+    expect(subject.bikes_docked).to eq [bike] 
   end
 end
