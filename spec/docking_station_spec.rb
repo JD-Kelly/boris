@@ -20,7 +20,7 @@ describe DockingStation do
     it { is_expected.to respond_to(:docked).with(1).argument }
     
     it 'errors when docking station full' do 
-      20.times { subject.docked(Bike.new) }
+      DockingStation::DEFAULT_CAPACITY.times { subject.docked(Bike.new) }
       expect { subject.docked(Bike.new)}.to raise_error "No space available" 
     end
   end
