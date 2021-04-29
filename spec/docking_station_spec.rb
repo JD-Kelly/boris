@@ -30,4 +30,14 @@ describe DockingStation do
     subject.docked(bike)
     expect(subject.bikes_docked).to eq [bike] 
   end
+  describe "#initialize" do
+    it "has a default capacity of 20" do
+      bike = DockingStation.new
+      expect(bike.capacity).to eq DockingStation::DEFAULT_CAPACITY
+    end
+    it "saves argument to @capacity" do
+      bike = DockingStation.new(30)
+      expect(bike.capacity).to eq 30
+    end
+  end
 end
