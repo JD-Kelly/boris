@@ -9,6 +9,7 @@ class DockingStation
   end
 
   def docked(bike)
+    fail 'No space available' if @bike_docked 
     @bike_docked = bike
   end
 end

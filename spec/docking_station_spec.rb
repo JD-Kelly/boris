@@ -15,8 +15,15 @@ describe DockingStation do
     bike = Bike.new
     expect(bike).to be_working
   end 
-
-  it { is_expected.to respond_to(:docked).with(1).argument }
+  
+  describe "#docked" do
+    it { is_expected.to respond_to(:docked).with(1).argument }
+    
+    it 'errors when docking station full' do 
+      subject.docked(Bike.new)
+      expect { subject.docked(Bike.new)}.to raise_error "No space available" 
+    end
+  end
 
   it 'returns docked bike' do 
     bike = Bike.new
