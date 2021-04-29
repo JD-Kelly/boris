@@ -8,13 +8,13 @@ describe DockingStation do
     it "Errors when @bikes_docked is empty" do
       expect {subject.release_bike}.to raise_error "No bikes available"
     end
-
+    it "only releases working bikes" do
+      bike = Bike.new
+      bike.broken
+      subject.docked(bike)
+      expect {subject.release_bike}.to raise_error 'No bikes available'
+    end
   end
-
-  it 'releases working bikes' do
-    bike = Bike.new
-    expect(bike).to be_working
-  end 
   
   describe "#docked" do
     it { is_expected.to respond_to(:docked).with(1).argument }
